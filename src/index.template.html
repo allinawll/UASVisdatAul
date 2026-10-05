@@ -3,291 +3,261 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ketimpangan Gender Indonesia: Dashboard Visualisasi 514 Kabupaten/Kota</title>
-<meta name="description" content="Dashboard interaktif ketimpangan gender kabupaten/kota Indonesia: visualisasi multivariat, hierarki, dan geospasial. Sumber: BPS.">
-<meta name="theme-color" content="#0C2D38">
+<title>Ketimpangan Gender Indonesia | Dashboard Visualisasi 514 Kabupaten/Kota</title>
+<meta name="description" content="Dashboard interaktif ketimpangan gender kabupaten/kota Indonesia: hierarki, geospasial, dan multivariat. Sumber: BPS.">
+<meta name="theme-color" content="#FFE6EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <style>
 /*__CSS__*/
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"></div>
+<div class="app">
 
-<header class="site-head">
-  <div class="head-in">
-    <a class="brand" href="#home" data-go="home" aria-label="Ketimpangan Gender Indonesia, ke halaman Home"><b>Ketimpangan Gender Indonesia</b></a>
-    <nav class="tabs" role="tablist" aria-label="Halaman dashboard">
-      <a class="tab" role="tab" href="#home" id="tab-home" data-tab="home" aria-controls="panel-home" aria-selected="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Home</span></a>
-      <a class="tab" role="tab" href="#multivariat" id="tab-multivariat" data-tab="multivariat" aria-controls="panel-multivariat" aria-selected="false" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><circle cx="9" cy="14" r="1.6"/><circle cx="13" cy="9" r="1.6"/><circle cx="17" cy="13" r="1.6"/><circle cx="8" cy="8" r="1.2"/></svg><span>Multivariat</span></a>
-      <a class="tab" role="tab" href="#hierarki" id="tab-hierarki" data-tab="hierarki" aria-controls="panel-hierarki" aria-selected="false" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h9M12 8h9"/></svg><span>Hierarki</span></a>
-      <a class="tab" role="tab" href="#geospasial" id="tab-geospasial" data-tab="geospasial" aria-controls="panel-geospasial" aria-selected="false" tabindex="-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Geospasial</span></a>
-    </nav>
+<header class="top">
+  <a class="brand" href="#home" aria-label="Ketimpangan Gender Indonesia, ke Home">Ketimpangan <em>Gender</em></a>
+  <nav class="tabs" role="tablist" aria-label="Bagian dashboard">
+    <a class="tab" role="tab" href="#home" data-tab="home" id="tab-home" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Home</span></a>
+    <a class="tab" role="tab" href="#hierarki" data-tab="hierarki" id="tab-hierarki" aria-label="Hierarki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h9M12 8h9"/></svg><span>Hierarki</span></a>
+    <a class="tab" role="tab" href="#geospasial" data-tab="geospasial" id="tab-geospasial" aria-label="Geospasial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Geospasial</span></a>
+    <a class="tab" role="tab" href="#multivariat" data-tab="multivariat" id="tab-multivariat" aria-label="Multivariat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><circle cx="9" cy="14" r="1.6"/><circle cx="13" cy="9" r="1.6"/><circle cx="17" cy="13" r="1.6"/><circle cx="8" cy="8" r="1.2"/></svg><span>Multivariat</span></a>
+  </nav>
+  <div class="grow"></div>
+  <div class="focusbar" id="focusbar" aria-live="polite"></div>
+  <div class="gsearch" id="gsearch">
+    <button class="sb-toggle" id="sbToggle" type="button" aria-label="Cari kabupaten/kota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+    <div class="sb" id="sbBox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="sbInput" type="text" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="sbList" aria-label="Cari kabupaten/kota" placeholder="Cari kabupaten/kota" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+      <button class="sb-clear" id="sbClear" type="button" aria-label="Hapus pencarian" hidden>&times;</button>
+    </div>
   </div>
 </header>
 
-<main id="main">
+<div class="pagerbar" id="pagerbar">
+  <div class="pb-where" id="pbWhere"></div>
+  <div class="pb-dots" id="pbDots" role="tablist" aria-label="Halaman pada bagian ini"></div>
+  <div class="pb-nav"><button type="button" id="pbPrev" aria-label="Halaman sebelumnya">&larr; <span class="lab">Sebelumnya</span></button><button type="button" id="pbNext" aria-label="Halaman berikutnya"><span class="lab" id="pbNextLab">Berikutnya</span> &rarr;</button></div>
+</div>
+
+<main class="stage" id="stage">
 
 <!-- ============================================================ HOME -->
-<section class="panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home">
-  <div class="hero">
-    <h1>Ketimpangan gender di 514 kabupaten/kota Indonesia</h1>
-    <p>Dashboard ini membaca Indeks Ketimpangan Gender (IKG) bersama indikator pendidikan, ketenagakerjaan, dan harapan hidup menurut jenis kelamin. Tiga cara pandang tersedia: multivariat, hierarki, dan geospasial.</p>
-    <div id="waffle" class="waffle" role="img" aria-label="Satu petak per kabupaten/kota, diurutkan dari IKG terendah ke tertinggi"></div>
-    <div class="waffle-read" id="waffleRead" aria-live="polite">Rincian kabupaten/kota yang dipilih tampil di sini.</div>
-    <div class="waffle-cap"><span>Terendah (paling setara)</span><span>Satu petak = satu kabupaten/kota, warna = IKG</span><span>Tertinggi (paling timpang)</span></div>
-  </div>
-
-  <div class="kpis" id="homeKpis"></div>
-
-  <div class="grid" id="homeFinds"></div>
-
-  <div class="grid" style="margin-top: var(--gap)">
-    <article class="card s6" id="cardRead">
-      <header><h3>Cara membaca warna dan nilai</h3></header>
-      <div class="lbl"><b>IKG</b> (Indeks Ketimpangan Gender): makin gelap, makin timpang</div>
-      <div class="ramp" id="rampIKG"></div>
-      <div class="ramp-cap"><span></span><span></span></div>
-      <p class="readnote" id="readIKG"></p>
-      <div class="lbl" style="margin-top:14px"><b>IPG</b> (Indeks Pembangunan Gender): makin gelap, makin setara</div>
-      <div class="ramp" id="rampIPG"></div>
-      <div class="ramp-cap"><span></span><span></span></div>
-      <p class="readnote" id="readIPG"></p>
-      <div class="lbl" style="margin-top:14px">Wilayah (kategori, dengan bentuk penanda berbeda)</div>
-      <div class="chips" id="regionKey" style="margin-top:6px"></div>
-      <p class="readnote" id="readPal" style="margin-top:10px"></p>
-    </article>
-    <article class="card s6">
-      <header><h3>Sumber dan metadata data</h3><p class="sub keep">Data utama berasal dari BPS.</p></header>
-      <table class="meta" id="metaTable"></table>
-    </article>
-    <article class="card s12">
-      <header><h3>Istilah dan indikator</h3></header>
-      <div id="glossary"></div>
-    </article>
-    <article class="card s12">
-      <header><h3>Batasan dan rujukan</h3></header>
-      <div id="limits"></div>
-    </article>
-    <article class="card s12" id="idCard">
-      <header><h3>Identitas pembuat</h3></header>
-      <div class="idrow">
-        <div class="avatar" id="avatar" role="img" aria-label="Foto pembuat"></div>
-        <dl class="gloss idlist" id="idList"></dl>
+<section class="tabpane" id="tabpane-home">
+  <div class="pg" id="pg-home-0">
+    <div class="home0">
+      <div class="titlecard hero card">
+        <span class="step">Dashboard data BPS</span>
+        <h1>Ketimpangan gender di <em>514 kabupaten/kota</em></h1>
+        <p>Tiga langkah membacanya: seberapa besar, di mana, dan seperti apa profilnya.</p>
+        <div class="waffle" id="waffle" role="img" aria-label="Satu petak per kabupaten/kota, diurutkan dari IKG terendah ke tertinggi"></div>
+        <div class="waffle-read" id="waffleRead" aria-live="polite"></div>
       </div>
-    </article>
-  </div>
-</section>
-
-<!-- ============================================================ MULTIVARIAT -->
-<section class="panel" id="panel-multivariat" role="tabpanel" aria-labelledby="tab-multivariat" hidden>
-  <div class="lead">
-    <h2>Multivariat: pola gabungan 10 indikator</h2>
-    <p>Setiap kabupaten/kota diringkas oleh 10 variabel numerik, lalu dibandingkan lewat reduksi dimensi, koordinat paralel, heatmap, radar, dan matriks sebar.</p>
-    <p class="how">Pilih area pada diagram sebar, seret pada sumbu koordinat paralel, atau klik chip wilayah. Semua tampilan ikut menyorot kabupaten/kota yang sama. Pada layar sentuh, mode Lihat menjaga halaman tetap bisa digulir.</p>
-  </div>
-
-  <div class="toolbar" role="group" aria-label="Kontrol seleksi">
-    <div class="grp"><span class="lbl">Wilayah</span><div class="chips" id="regionChips"></div></div>
-    <div class="grp"><span class="lbl">Mode pada diagram</span>
-      <div class="seg" id="modeSeg" role="group" aria-label="Mode interaksi diagram">
-        <button data-v="select" aria-pressed="true">Pilih area</button>
-        <button data-v="zoom" aria-pressed="false">Zoom</button>
-        <button data-v="view" aria-pressed="false">Lihat</button>
-      </div>
+      <div class="kpis" id="homeKpis"></div>
+      <div class="flow" id="homeFlow"></div>
     </div>
-    <button class="btn" id="resetSel">Hapus semua pilihan</button>
   </div>
-
-  <div class="kpis" id="selKpis" aria-live="polite"></div>
-
-  <div class="grid">
-    <article class="card s7">
-      <header>
-        <h3 id="projTitle">Proyeksi dua dimensi kabupaten/kota</h3>
-        <p class="sub" id="projSub"></p>
-      </header>
-      <div class="toolbar" style="margin:0 0 8px;padding:6px 8px;border:0;background:var(--bg)">
-        <div class="grp"><span class="lbl">Teknik</span>
-          <div class="seg" id="projSeg"><button data-v="pca" aria-pressed="true">PCA</button><button data-v="umap" aria-pressed="false">UMAP</button></div></div>
-        <div class="grp"><span class="lbl">Warna titik</span>
-          <div class="seg" id="colSeg"><button data-v="region" aria-pressed="true">Wilayah</button><button data-v="ikg" aria-pressed="false">IKG</button></div></div>
-        <button class="btn" id="projJump" type="button">Lihat interpretasi</button>
-      </div>
-      <div id="plotProj" class="plot h480"></div>
-      <div class="src">Sumber: BPS. Diolah dengan standardisasi z-score, PCA, dan UMAP (n_neighbors 15, min_dist 0,1, seed 42).</div>
-    </article>
-
-    <article class="card s5">
-      <header><h3>Scree plot: berapa komponen cukup?</h3>
-        <p class="sub">Batang: varians tiap komponen. Garis: kumulatif. Garis putus: ambang 80%.</p></header>
-      <div id="plotScree" class="plot h360"></div>
-      <div class="note" id="screeNote"></div>
-      <div class="src">Sumber: BPS. Diolah.</div>
-    </article>
-
-    <article class="card s12">
-      <header><h3>Koordinat paralel: profil tiap kabupaten/kota pada 10 sumbu</h3>
-        <p class="sub">Satu garis = satu kabupaten/kota. Seret pada sumbu untuk menyaring rentang nilai. Selisih = laki-laki dikurangi perempuan.</p></header>
-      <div class="hscroll"><div id="plotPar" class="plot"></div></div>
-      <div class="src">Sumber: BPS. Warna garis mengikuti wilayah. Garis abu-abu berada di luar pilihan.</div>
-    </article>
-
-    <article class="card s6">
-      <header><h3>Heatmap korelasi terklaster</h3>
-        <p class="sub">Variabel diurutkan agar yang berkorelasi tinggi berdekatan (klaster hierarkis, average linkage).</p></header>
-      <div class="hscroll"><div id="plotHeat" class="plot"></div></div>
-      <div class="src">Sumber: BPS. Korelasi Pearson, n = 514.</div>
-    </article>
-
-    <article class="card s6">
-      <header><h3>Radar: profil rata-rata per wilayah</h3>
-        <p class="sub">Setiap sumbu diskalakan 0 sampai 1 (min-maks, seluruh kabupaten/kota). Garis hitam putus adalah rata-rata pilihan aktif.</p></header>
-      <div id="plotRadar" class="plot"></div>
-      <div class="src">Sumber: BPS. Diolah. Pada sumbu Selisih, nilai tinggi berarti laki-laki lebih unggul.</div>
-    </article>
-
-    <article class="card s7">
-      <header><h3>Matriks sebar PC1 sampai PC5</h3>
-        <p class="sub">Segitiga bawah saja. Seleksi pada satu panel menyorot titik yang sama di panel lain.</p></header>
-      <div class="hscroll"><div id="plotSplom" class="plot h560"></div></div>
-      <div class="src">Sumber: BPS. Skor komponen utama dari standardisasi 10 variabel.</div>
-    </article>
-
-    <article class="card s5">
-      <header><h3>Bobot komponen (loading)</h3>
-        <p class="sub">Variabel mana yang membentuk tiap komponen. Teal negatif, cokelat positif.</p></header>
-      <div class="hscroll"><div id="plotLoad" class="plot h480"></div></div>
-      <div class="src">Sumber: BPS. Diolah.</div>
-    </article>
-
-    <article class="card s12" id="cardPC">
-      <header><h3>Interpretasi lima komponen utama</h3>
-        <p class="sub">Tiap komponen adalah kombinasi linear 10 variabel terstandardisasi. Tanda komponen bersifat sembarang, jadi kutub positif dan negatif dibaca sebagai dua ujung satu poros. Korelasi memakai Spearman (n = 514).</p></header>
-      <div id="pcInterp" class="pcgrid"></div>
-      <div class="src">Sumber: BPS. Diolah. Fakta bersumber dari loading dan skor komponen; inferensi adalah tafsir penulis dan perlu diuji.</div>
-    </article>
-
-    <article class="card s12" id="cardUMAP">
-      <header><h3>Interpretasi UMAP dua dimensi</h3>
-        <p class="sub">Label G1 sampai G7 pada diagram UMAP menandai kelompok padat hasil HDBSCAN (ukuran minimum 15), diurutkan dari IKG rata-rata tertinggi.</p></header>
-      <div id="umapInterp"></div>
-      <div class="src">Sumber: BPS. Diolah. UMAP: n_neighbors 15, min_dist 0,1, seed 42; data terstandardisasi.</div>
-    </article>
-
-    <article class="card s12">
-      <header><h3>Interpretasi kelompok dan pencilan</h3></header>
-      <div id="multiInsight"></div>
-    </article>
+  <div class="pg" id="pg-home-1">
+    <div class="titlecard"><span class="step">Home · Cara membaca</span><h2>Warna dan <em>istilah</em></h2><p>Panduan ini berlaku di seluruh halaman.</p></div>
+    <div class="two">
+      <article class="card pad" id="cardRead">
+        <h3>Cara membaca warna dan nilai</h3>
+        <div class="scrollbox">
+          <div class="lbl2"><b>IKG</b> (Indeks Ketimpangan Gender): makin gelap, makin timpang</div>
+          <div class="ramp" id="rampIKG"></div><div class="ramp-cap"><span></span><span></span></div>
+          <p class="readnote" id="readIKG"></p>
+          <div class="lbl2"><b>IPG</b> (Indeks Pembangunan Gender): makin gelap, makin setara</div>
+          <div class="ramp" id="rampIPG"></div><div class="ramp-cap"><span></span><span></span></div>
+          <p class="readnote" id="readIPG"></p>
+          <div class="lbl2" style="margin-bottom:6px">Wilayah (kategori, dengan bentuk penanda berbeda)</div>
+          <div class="chips" id="regionKey"></div>
+          <p class="readnote" id="readPal" style="margin-top:10px"></p>
+        </div>
+      </article>
+      <article class="card pad" id="cardGloss">
+        <h3>Istilah dan indikator</h3>
+        <div class="tb" style="padding-bottom:6px"><div class="seg sm" data-seg="gloss"><button data-v="main" aria-pressed="true">Indikator utama</button><button data-v="mv" aria-pressed="false">Variabel multivariat</button><button data-v="other" aria-pressed="false">Lainnya</button></div></div>
+        <div class="scrollbox" id="glossary"></div>
+      </article>
+    </div>
+  </div>
+  <div class="pg" id="pg-home-2">
+    <div class="titlecard"><span class="step">Home · Sumber dan identitas</span><h2>Dari mana <em>datanya</em></h2><p>Sumber, batasan, rujukan, dan pembuat.</p></div>
+    <div class="home2">
+      <article class="card pad" id="idCard"><div class="idrow"><div class="avatar" id="avatar" role="img" aria-label="Foto pembuat"></div><div><h3>Identitas</h3><dl class="idl" id="idList"></dl></div></div></article>
+      <article class="card pad h2meta"><h3>Sumber dan metadata</h3><div class="scrollbox"><table class="def" id="metaTable"></table></div></article>
+      <article class="card pad h2lim"><h3>Batasan dan rujukan</h3><div class="scrollbox" id="limits"></div></article>
+    </div>
   </div>
 </section>
 
 <!-- ============================================================ HIERARKI -->
-<section class="panel" id="panel-hierarki" role="tabpanel" aria-labelledby="tab-hierarki" hidden>
-  <div class="lead">
-    <h2>Hierarki: Indonesia, wilayah, provinsi, kabupaten/kota</h2>
-    <p>Luas bidang menunjukkan penduduk atau PDRB, warna menunjukkan IKG atau IPG.</p>
-    <p class="how">Klik bidang untuk masuk ke tingkat berikutnya dan klik remah roti untuk naik. Treemap dan sunburst bergerak bersama.</p>
+<section class="tabpane" id="tabpane-hierarki">
+  <div class="pg" id="pg-hierarki-0">
+    <div class="titlecard"><span class="step">Langkah 1 dari 3 · Besaran</span><h2>Siapa yang <em>menanggung</em> ketimpangan?</h2><p>Luas bidang menunjukkan ukuran, warna menunjukkan indeks. Masuk dari wilayah ke kabupaten/kota.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Ukuran</span><div class="seg" data-seg="hSize"><button data-v="Penduduk" aria-pressed="true">Penduduk</button><button data-v="PDRB" aria-pressed="false">PDRB</button></div></div>
+          <div class="grp"><span class="lbl">Warna</span><div class="seg" data-seg="hColor"><button data-v="IKG" aria-pressed="true">IKG</button><button data-v="IPG" aria-pressed="false">IPG</button></div></div>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Klik bidang wilayah atau provinsi untuk masuk ke tingkat berikutnya; klik kabupaten/kota untuk memilihnya. Gunakan jalur di bawah untuk naik. Pilihan Anda terbawa ke halaman lain." aria-label="Cara membaca">i</button>
+          <div class="crumbs" data-crumbs style="flex-basis:100%"></div>
+        </div>
+        <div class="chart"><div id="plotTree"></div></div>
+      </section>
+      <aside class="card insight" id="insHR0" aria-live="polite"></aside>
+    </div>
   </div>
-
-  <div class="toolbar">
-    <div class="grp"><span class="lbl">Ukuran</span>
-      <div class="seg" id="hSize"><button data-v="Penduduk" aria-pressed="true">Penduduk</button><button data-v="PDRB" aria-pressed="false">PDRB</button></div></div>
-    <div class="grp"><span class="lbl">Warna</span>
-      <div class="seg" id="hColor"><button data-v="IKG" aria-pressed="true">IKG</button><button data-v="IPG" aria-pressed="false">IPG</button></div></div>
-    <div class="grp"><span class="lbl">Kedalaman</span>
-      <div class="seg" id="hDepth"><button data-v="3" aria-pressed="true">Bertahap</button><button data-v="4" aria-pressed="false">Semua tingkat</button></div></div>
-    <div class="grp"><span class="lbl">Tampilan</span>
-      <div class="seg" id="hView"><button data-v="both" aria-pressed="true">Keduanya</button><button data-v="treemap" aria-pressed="false">Treemap</button><button data-v="sunburst" aria-pressed="false">Sunburst</button></div></div>
-  </div>
-
-  <div class="grid">
-    <article class="card s12">
-      <div class="crumbs" id="crumbs" aria-label="Posisi dalam hierarki"></div>
-    </article>
-    <article class="card s7" id="cardTree">
-      <header><h3>Treemap</h3><p class="sub" id="treeSub"></p></header>
-      <div id="plotTree" class="plot h560"></div>
-      <div class="src" id="treeSrc"></div>
-    </article>
-    <article class="card s5" id="cardSun">
-      <header><h3>Sunburst</h3><p class="sub" id="sunSub"></p></header>
-      <div id="plotSun" class="plot h560"></div>
-      <div class="src" id="sunSrc"></div>
-    </article>
-    <article class="card s12">
-      <header><h3 id="rankTitle">Peringkat pada tingkat terpilih</h3><p class="sub keep" id="rankSub"></p></header>
-      <div class="grid" id="rankBody"></div>
-    </article>
-    <article class="card s12">
-      <header><h3>Catatan baca</h3></header>
-      <div id="hierInsight"></div>
-    </article>
+  <div class="pg" id="pg-hierarki-1">
+    <div class="titlecard"><span class="step">Langkah 1 dari 3 · Besaran</span><h2>Mana yang <em>paling ekstrem</em>?</h2><p>Struktur yang sama dalam cincin, dengan peringkat tertinggi dan terendah pada tingkat terpilih.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Ukuran</span><div class="seg" data-seg="hSize"><button data-v="Penduduk" aria-pressed="true">Penduduk</button><button data-v="PDRB" aria-pressed="false">PDRB</button></div></div>
+          <div class="grp"><span class="lbl">Warna</span><div class="seg" data-seg="hColor"><button data-v="IKG" aria-pressed="true">IKG</button><button data-v="IPG" aria-pressed="false">IPG</button></div></div>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Cincin dari dalam ke luar: wilayah, provinsi, kabupaten/kota. Klik busur untuk masuk, klik pusat untuk naik." aria-label="Cara membaca">i</button>
+          <div class="crumbs" data-crumbs style="flex-basis:100%"></div>
+        </div>
+        <div class="chart"><div id="plotSun"></div></div>
+      </section>
+      <aside class="card insight" id="insHR1" aria-live="polite"></aside>
+    </div>
   </div>
 </section>
 
 <!-- ============================================================ GEOSPASIAL -->
-<section class="panel" id="panel-geospasial" role="tabpanel" aria-labelledby="tab-geospasial" hidden>
-  <div class="lead">
-    <h2>Geospasial: sebaran ketimpangan antardaerah</h2>
-    <p>Dua jenis peta pada satu kanvas: choropleth untuk nilai indeks dan simbol proporsional untuk skala ekonomi (PDRB).</p>
-    <p class="how">Atur lapisan, variabel, dan klasifikasi pada kontrol di atas peta. Klik kelas pada legenda untuk menyorotnya, dan klik wilayah pada peta untuk melihat profilnya.</p>
-  </div>
-
-  <div class="toolbar">
-    <div class="grp"><span class="lbl">Variabel</span>
-      <div class="seg" id="gVar"><button data-v="IKG" aria-pressed="true">IKG</button><button data-v="IPG" aria-pressed="false">IPG</button></div></div>
-    <div class="grp"><label class="lbl" for="gMethod">Klasifikasi</label>
-      <select id="gMethod"><option value="quantile">Kuantil (5 kelas)</option><option value="natural">Natural breaks (5 kelas)</option><option value="equal">Interval sama (5 kelas)</option></select></div>
-    <div class="grp"><label class="lbl" for="gReg">Fokus wilayah</label>
-      <select id="gReg"></select></div>
-    <div class="grp"><label class="lbl" for="gSearch">Cari</label>
-      <input type="search" id="gSearch" list="kabList" placeholder="Nama kabupaten/kota" autocomplete="off"><datalist id="kabList"></datalist></div>
-    <button class="btn" id="gReset">Atur ulang peta</button>
-  </div>
-
-  <div class="grid">
-    <div class="s8 stack">
-    <article class="card" id="mapCard">
-      <header><h3 id="mapTitle"></h3><p class="sub" id="mapSub"></p></header>
-      <div class="grp" style="margin:0 0 8px"><span class="lbl">Lapisan</span>
-        <div class="seg" id="gLayer"><button data-v="choro" aria-pressed="true">Choropleth</button><button data-v="bubble" aria-pressed="false">Simbol proporsional</button><button data-v="both" aria-pressed="false">Keduanya</button></div></div>
-      <div class="legend" id="legend" role="group" aria-label="Legenda kelas, klik untuk menyorot"></div>
-      <div class="bubble-key" id="bubbleKey"></div>
-      <div id="map" role="application" aria-label="Peta interaktif kabupaten/kota Indonesia"></div>
-      <div class="src" id="mapSrc"></div>
-    </article>
-
-    <article class="card moran" id="moranCard">
-      <header>
-        <h3>Autokorelasi spasial: Moran's I</h3>
-        <p class="sub">Mengukur apakah kabupaten/kota bernilai mirip saling bertetangga. Bobot: k = 8 tetangga terdekat dari titik pusat poligon, baris dibakukan; uji dengan 999 permutasi. Nilai dihitung ulang saat variabel atau fokus wilayah berubah; pada fokus wilayah, tetangga hanya dicari di dalam wilayah itu. Pada diagram sebar Moran, sumbu x adalah nilai terbakukan dan sumbu y rata-rata nilai tetangga; kemiringan garis sama dengan I. Klik titik untuk memilih kabupaten/kota.</p>
-      </header>
-      <div class="moran-grid">
-        <div class="moran-left">
-          <div class="moran-big"><div class="v" id="moranV"></div><div class="k" id="moranK"></div></div>
-          <div class="mchips" id="moranChips"></div>
-          <div id="moranText"></div>
+<section class="tabpane" id="tabpane-geospasial">
+  <div class="pg" id="pg-geospasial-0">
+    <div class="titlecard"><span class="step">Langkah 2 dari 3 · Sebaran</span><h2>Di mana <em>hotspot</em>-nya?</h2><p>Choropleth untuk nilai indeks, simbol proporsional untuk skala ekonomi (PDRB).</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Variabel</span><div class="seg" data-seg="gVar"><button data-v="IKG" aria-pressed="false">IKG</button><button data-v="IPG" aria-pressed="true">IPG</button></div></div>
+          <div class="grp"><span class="lbl">Wilayah</span><select class="sel" data-sel="gReg" aria-label="Fokus wilayah"></select></div>
+          <button class="pill advbtn" type="button" data-adv aria-expanded="false">Opsi</button>
+          <div class="advwrap">
+            <div class="grp"><span class="lbl">Lapisan</span><div class="seg" data-seg="gLayer"><button data-v="choro" aria-pressed="true">Choropleth</button><button data-v="bubble" aria-pressed="false">Simbol</button><button data-v="both" aria-pressed="false">Keduanya</button></div></div>
+            <div class="grp"><span class="lbl">Kelas</span><select class="sel" data-sel="gMethod" aria-label="Metode klasifikasi"><option value="quantile">Kuantil</option><option value="natural">Natural breaks</option><option value="equal">Interval sama</option></select></div>
+            <button class="pill" type="button" data-act="gReset">Atur ulang peta</button>
+          </div>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Klik wilayah pada peta untuk memilih kabupaten/kota; klik kelas pada legenda untuk menyorotnya. Pencarian ada di kanan atas. Pilihan terbawa ke halaman lain." aria-label="Cara membaca">i</button>
         </div>
-        <div class="moran-right"><div id="plotMoran" class="plot h360"></div></div>
-      </div>
-      <div class="src" id="moranSrc"></div>
-    </article>
+        <div class="chart"><div id="map" role="application" aria-label="Peta interaktif kabupaten/kota Indonesia"></div><button class="pill mapdrag" id="mapDrag" type="button" aria-pressed="true">Geser peta: aktif</button>
+          <div class="maplegend"><div class="legend" id="legend" role="group" aria-label="Legenda kelas"></div></div><div class="bkey" id="bubbleKey"></div></div>
+      </section>
+      <aside class="card insight" id="insGE0" aria-live="polite"></aside>
     </div>
-    <aside class="s4" style="display:grid;gap:var(--gap);align-content:start">
-      <article class="card detail" id="detailCard"></article>
-      <article class="card" id="geoInsight"></article>
-    </aside>
+  </div>
+  <div class="pg" id="pg-geospasial-1">
+    <div class="titlecard"><span class="step">Langkah 2 dari 3 · Sebaran</span><h2>Apakah daerah serupa <em>saling berdekatan</em>?</h2><p>Moran's I menguji kemiripan nilai antartetangga; diagram sebar Moran menunjukkan siapa yang membentuk kantong.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Variabel</span><div class="seg" data-seg="gVar"><button data-v="IKG" aria-pressed="false">IKG</button><button data-v="IPG" aria-pressed="true">IPG</button></div></div>
+          <div class="grp"><span class="lbl">Wilayah</span><select class="sel" data-sel="gReg" aria-label="Fokus wilayah"></select></div>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Sumbu x: nilai terbakukan daerah; sumbu y: rata-rata nilai 8 tetangga terdekat; garis putus: kemiringan = Moran's I. Klik titik untuk memilih kabupaten/kota." aria-label="Cara membaca">i</button>
+        </div>
+        <div class="chart"><div id="plotMoran"></div></div>
+      </section>
+      <aside class="card insight" id="insGE1" aria-live="polite"></aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ MULTIVARIAT -->
+<section class="tabpane" id="tabpane-multivariat">
+  <div class="pg" id="pg-multivariat-0">
+    <div class="titlecard"><span class="step">Langkah 3 dari 3 · Profil</span><h2>Seperti apa <em>profil</em> daerahnya?</h2><p>Sepuluh variabel diringkas ke dua dimensi dengan UMAP dan PCA; scree plot menunjukkan seberapa cukup dua dimensi itu.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Teknik</span><div class="seg" data-seg="mProj"><button data-v="umap" aria-pressed="true">UMAP</button><button data-v="pca" aria-pressed="false">PCA</button><button data-v="scree" aria-pressed="false">Scree</button></div></div>
+          <button class="pill advbtn" type="button" data-adv aria-expanded="false">Opsi</button>
+          <div class="advwrap">
+            <div class="grp"><span class="lbl">Warna</span><div class="seg" data-seg="mColor"><button data-v="region" aria-pressed="true">Wilayah</button><button data-v="ikg" aria-pressed="false">IKG</button><button data-v="ipg" aria-pressed="false">IPG</button></div></div>
+            <div class="grp"><span class="lbl">Mode</span><div class="seg" data-seg="mMode"><button data-v="select" aria-pressed="true">Pilih area</button><button data-v="zoom" aria-pressed="false">Zoom</button><button data-v="view" aria-pressed="false">Lihat</button></div></div>
+          </div>
+          <button class="pill" type="button" data-act="mReset">Hapus pilihan</button>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Seret pada diagram untuk memilih area (mode Pilih area); chip wilayah memilih seluruh wilayah. Seleksi tersorot di semua halaman Multivariat. Pada layar sentuh, mode Lihat menjaga halaman tetap bisa digulir." aria-label="Cara membaca">i</button>
+          <div class="chips scroll" data-chips="regions" style="flex-basis:100%"></div>
+        </div>
+        <div class="chart"><div id="plotProj"></div><div id="plotScree" hidden></div></div>
+      </section>
+      <aside class="card insight" id="insMV0" aria-live="polite"></aside>
+    </div>
+  </div>
+  <div class="pg" id="pg-multivariat-1">
+    <div class="titlecard"><span class="step">Langkah 3 dari 3 · Profil</span><h2>Apa yang <em>membentuk</em> komponen?</h2><p>Loading menunjukkan variabel pembentuk tiap komponen; matriks komponen menunjukkan posisi daerah pada lima komponen sekaligus.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Tampilan</span><div class="seg" data-seg="mViewB"><button data-v="load" aria-pressed="true">Loading</button><button data-v="splom" aria-pressed="false">Matriks PC</button></div></div>
+          <div class="grp" id="pcSegWrap"><span class="lbl">Komponen</span><div class="seg sm" data-seg="mPC"><button data-v="0" aria-pressed="true">PC1</button><button data-v="1" aria-pressed="false">PC2</button><button data-v="2" aria-pressed="false">PC3</button><button data-v="3" aria-pressed="false">PC4</button><button data-v="4" aria-pressed="false">PC5</button></div></div>
+          <button class="pill" type="button" data-act="mReset">Hapus pilihan</button>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Warna sel menunjukkan loading (lihat legenda; nilai muncul saat hover). Kotak tebal menandai komponen terpilih. Pada Matriks PC, seret untuk memilih daerah." aria-label="Cara membaca">i</button>
+          <div class="chips scroll" data-chips="regions" style="flex-basis:100%"></div>
+        </div>
+        <div class="chart"><div id="plotLoad"></div><div id="plotSplom" hidden></div></div>
+      </section>
+      <aside class="card insight" id="insMV1" aria-live="polite"></aside>
+    </div>
+  </div>
+  <div class="pg" id="pg-multivariat-2">
+    <div class="titlecard"><span class="step">Langkah 3 dari 3 · Profil</span><h2>Apa yang <em>membedakan</em> kelompok terpilih?</h2><p>Setiap garis adalah satu kabupaten/kota; garis terpilih tampil di depan.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp touchonly"><span class="lbl">Sentuh</span><div class="seg" data-seg="mTouch"><button data-v="view" aria-pressed="true">Gulir halaman</button><button data-v="select" aria-pressed="false">Seret sumbu</button></div></div>
+          <button class="pill" type="button" data-act="mReset">Hapus pilihan</button>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Seret pada sumbu untuk menyaring rentang nilai; pilih wilayah lewat chip. Selisih = laki-laki dikurangi perempuan. Garis abu-abu berada di luar pilihan. Pada layar sentuh, pilih Seret sumbu untuk menyaring." aria-label="Cara membaca">i</button>
+          <div class="chips scroll" data-chips="regions" style="flex-basis:100%"></div>
+        </div>
+        <div class="chart"><div class="hs"><div id="plotPar"></div></div></div>
+      </section>
+      <aside class="card insight" id="insMV2" aria-live="polite"></aside>
+    </div>
+  </div>
+  <div class="pg" id="pg-multivariat-3">
+    <div class="titlecard"><span class="step">Langkah 3 dari 3 · Profil</span><h2>Bagaimana variabel <em>saling terkait</em>?</h2><p>Korelasi antarvariabel dan radar profil rata-rata wilayah.</p></div>
+    <div class="pg-body">
+      <section class="card viz">
+        <div class="tb">
+          <div class="grp"><span class="lbl">Tampilan</span><div class="seg" data-seg="mViewC"><button data-v="corr" aria-pressed="true">Korelasi</button><button data-v="radar" aria-pressed="false">Radar</button></div></div>
+          <button class="pill" type="button" data-act="mReset">Hapus pilihan</button>
+          <div class="sp"></div>
+          <button class="btn-i" type="button" data-tip="Korelasi dihitung ulang untuk kabupaten/kota terpilih (minimal 12 unit). Radar membandingkan rata-rata wilayah dengan pilihan aktif (garis putus)." aria-label="Cara membaca">i</button>
+          <div class="chips scroll" data-chips="regions" style="flex-basis:100%"></div>
+        </div>
+        <div class="chart"><div id="plotHeat"></div><div id="plotRadar" hidden></div></div>
+      </section>
+      <aside class="card insight" id="insMV3" aria-live="polite"></aside>
+    </div>
   </div>
 </section>
 
 </main>
+</div>
+
+<nav class="tabbar" aria-label="Bagian dashboard (ponsel)">
+  <a href="#home" data-tab="home" id="mtab-home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+  <a href="#hierarki" data-tab="hierarki" id="mtab-hierarki"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h9M12 8h9"/></svg>Hierarki</a>
+  <a href="#geospasial" data-tab="geospasial" id="mtab-geospasial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Geospasial</a>
+  <a href="#multivariat" data-tab="multivariat" id="mtab-multivariat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><circle cx="9" cy="14" r="1.6"/><circle cx="13" cy="9" r="1.6"/><circle cx="17" cy="13" r="1.6"/><circle cx="8" cy="8" r="1.2"/></svg>Multivariat</a>
+</nav>
+
+<ul class="sb-list" id="sbList" role="listbox" aria-label="Hasil pencarian" hidden></ul>
+<div class="tipbox" id="tipbox" role="tooltip" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
