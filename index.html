@@ -775,7 +775,7 @@ function sbMatches(q) {
 }
 function sbRender() {
   const q = sbIn.value; sbItems = sbMatches(q); sbAct = sbItems.length ? 0 : -1;
-  sbList.innerHTML = (q.trim() ? '' : '<li class="sb-hd" role="presentation">Terpadat penduduknya</li>') +
+  sbList.innerHTML = (q.trim() ? '' : '<li class="sb-hd" role="presentation">Terbanyak penduduknya</li>') +
     (sbItems.length ? sbItems.map((r, k) => '<li role="option" id="sbo' + k + '" data-i="' + r.i + '" aria-selected="' + (k === 0) + '"><b>' + esc(r.Kabupaten) + '</b><small>' + esc(r.prov) + ' · ' + esc(r.wil) + '</small></li>').join('') : '<li class="sb-empty" role="presentation">Tidak ada kabupaten/kota yang cocok</li>');
   sbPlace(); sbList.hidden = false; sbIn.setAttribute('aria-expanded', 'true'); sbClear.hidden = !q;
   sbIn.setAttribute('aria-activedescendant', sbItems.length ? 'sbo0' : '');
